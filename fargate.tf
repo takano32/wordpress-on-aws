@@ -203,7 +203,7 @@ resource "aws_ecs_task_definition" "this" {
       }
     ],
     "essential": true,
-    "image": "410869614410.dkr.ecr.${data.aws_region.current.name}.amazonaws.com/wp:latest",
+    "image": "828936781852.dkr.ecr.ap-northeast-1.amazonaws.com/wordpress:latest",
     "name": "wordpress",
     "portMappings": [
       {
