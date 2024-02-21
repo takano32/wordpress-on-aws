@@ -73,9 +73,11 @@ variable "db_min_capacity" {
 }
 variable "db_master_username" {
   description = "Master username of the db"
+  default     = "wordpress"
 }
 variable "db_master_password" {
   description = "Master password of the db"
+  default     = "wordpress"
 }
 variable "db_engine_version" {
   description = "The database engine version"

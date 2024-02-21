@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket = "giant-propeller-tf-state"
+    bucket = "wordpress-on-aws"
     key    = "wordpress"
   }
 }
@@ -8,6 +8,10 @@ terraform {
 provider "aws" {
   alias  = "us_east_1"
   region = "us-east-1"
+}
+
+provider "aws" {
+  region = "ap-northeast-1"
 }
 
 provider "random" {
