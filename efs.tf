@@ -1,7 +1,9 @@
 resource "aws_efs_file_system" "this" {
   creation_token = "${var.prefix}-${var.environment}"
   encrypted      = true
-  tags           = var.tags
+  tags           = {
+    Name = "${var.prefix}-${var.environment}"
+  }
 }
 
 resource "aws_efs_mount_target" "this" {
