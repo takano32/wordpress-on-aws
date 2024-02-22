@@ -1,6 +1,7 @@
 module "acm" {
+  # http://registry.terraform.io/modules/terraform-aws-modules/acm/aws/latest
   source      = "terraform-aws-modules/acm/aws"
-  version     = "~> v2.0"
+  version     = "~> v5.0"
   domain_name = var.site_domain
   zone_id     = data.aws_route53_zone.this.zone_id
   tags        = var.tags
@@ -106,7 +107,7 @@ resource "aws_cloudfront_distribution" "this" {
 
 
   viewer_certificate {
-    acm_certificate_arn      = module.acm.this_acm_certificate_arn
+    acm_certificate_arn      = module.acm.acm_certificate_arn
     ssl_support_method       = "sni-only"
     minimum_protocol_version = "TLSv1.1_2016"
   }
