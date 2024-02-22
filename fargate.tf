@@ -134,11 +134,11 @@ resource "aws_security_group" "wordpress" {
 }
 
 resource "aws_ecs_service" "this" {
-  name             = "${var.prefix}-${var.environment}"
-  cluster          = aws_ecs_cluster.this.id
-  task_definition  = aws_ecs_task_definition.this.arn
-  desired_count    = var.desired_count
-  launch_type      = "FARGATE"
+  name            = "${var.prefix}-${var.environment}"
+  cluster         = aws_ecs_cluster.this.id
+  task_definition = aws_ecs_task_definition.this.arn
+  desired_count   = var.desired_count
+  launch_type     = "FARGATE"
   network_configuration {
     security_groups = [aws_security_group.alb.id, aws_security_group.db.id, aws_security_group.efs.id]
     subnets         = module.vpc.private_subnets
@@ -167,11 +167,11 @@ resource "aws_ecs_task_definition" "this" {
   memory                   = var.task_memory
 
   runtime_platform {
-    cpu_architecture = "ARM64" # Indicate Graviton2 processor architecture
+    cpu_architecture        = "ARM64" # Indicate Graviton2 processor architecture
     operating_system_family = "LINUX"
   }
 
-  container_definitions    = <<CONTAINER_DEFINITION
+  container_definitions = <<CONTAINER_DEFINITION
 [
   {
     "secrets": [
@@ -352,17 +352,5 @@ resource "aws_appautoscaling_policy" "scale_down" {
       metric_interval_upper_bound = 0
       scaling_adjustment          = var.scaling_down_adjustment
     }
-  }
-}
-
-resource "aws_route53_record" "wordpress" {
-  zone_id = data.aws_route53_zone.this.zone_id
-  name    = var.public_alb_domain
-  type    = "A"
-
-  alias {
-    name                   = module.alb.lb_dns_name
-    zone_id                = module.alb.lb_zone_id
-    evaluate_target_health = true
   }
 }
