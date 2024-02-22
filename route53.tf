@@ -16,7 +16,6 @@ resource "aws_route53_record" "ipv4" {
     zone_id                = aws_cloudfront_distribution.this.hosted_zone_id
     evaluate_target_health = false
   }
-  allow_overwrite = true
 }
 
 # Add an IPv6 DNS record pointing to the CloudFront distribution

@@ -13,7 +13,7 @@ module "acm" {
 
 resource "aws_cloudfront_distribution" "this" {
   origin {
-    domain_name = var.public_alb_domain
+    domain_name = module.alb.lb_dns_name
     origin_id   = "alb"
 
     custom_origin_config {
