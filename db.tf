@@ -7,7 +7,7 @@ resource "aws_rds_cluster" "this" {
   cluster_identifier              = "${var.prefix}-${var.environment}"
   database_name                   = "wordpress"
   engine                          = "aurora-mysql"
-  engine_version                  = "8.0.mysql_aurora.3.04.0"
+  engine_version                  = "8.0.mysql_aurora.3.04.1"
   enable_http_endpoint            = false
   master_username                 = var.db_master_username
   master_password                 = var.db_master_password
@@ -32,7 +32,7 @@ resource "aws_rds_cluster" "this" {
 
 resource "aws_rds_cluster_instance" "cluster_instances" {
   engine             = "aurora-mysql"
-  engine_version     = "8.0.mysql_aurora.3.04.0"
+  engine_version     = "8.0.mysql_aurora.3.04.1"
   cluster_identifier = "${var.prefix}-${var.environment}"
   instance_class     = "db.serverless"
 
