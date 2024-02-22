@@ -4,16 +4,16 @@ resource "random_string" "snapshot_suffix" {
 }
 
 resource "aws_rds_cluster" "this" {
-  cluster_identifier        = "${var.prefix}-${var.environment}"
-  database_name             = "wordpress"
-  engine                    = "aurora-mysql"
-  engine_version            = "8.0.mysql_aurora.3.04.0"
-  enable_http_endpoint      = false
-  master_username           = var.db_master_username
-  master_password           = var.db_master_password
-  backup_retention_period   = var.db_backup_retention_days
-  preferred_backup_window   = var.db_backup_window
-  storage_encrypted         = true
+  cluster_identifier              = "${var.prefix}-${var.environment}"
+  database_name                   = "wordpress"
+  engine                          = "aurora-mysql"
+  engine_version                  = "8.0.mysql_aurora.3.04.0"
+  enable_http_endpoint            = false
+  master_username                 = var.db_master_username
+  master_password                 = var.db_master_password
+  backup_retention_period         = var.db_backup_retention_days
+  preferred_backup_window         = var.db_backup_window
+  storage_encrypted               = true
   enabled_cloudwatch_logs_exports = ["audit"]
 
   serverlessv2_scaling_configuration {
@@ -21,20 +21,20 @@ resource "aws_rds_cluster" "this" {
     max_capacity = 2
   }
 
-  db_subnet_group_name      = aws_db_subnet_group.this.name
-  vpc_security_group_ids    = [aws_security_group.db.id]
-  availability_zones        = [data.aws_availability_zones.this.names[0], data.aws_availability_zones.this.names[1], data.aws_availability_zones.this.names[2]]
-  tags                      = var.tags
+  db_subnet_group_name   = aws_db_subnet_group.this.name
+  vpc_security_group_ids = [aws_security_group.db.id]
+  availability_zones     = [data.aws_availability_zones.this.names[0], data.aws_availability_zones.this.names[1], data.aws_availability_zones.this.names[2]]
+  tags                   = var.tags
 
-  skip_final_snapshot  = true
-  apply_immediately = true
+  skip_final_snapshot = true
+  apply_immediately   = true
 }
 
 resource "aws_rds_cluster_instance" "cluster_instances" {
-  engine                        = "aurora-mysql"
-  engine_version                = "8.0.mysql_aurora.3.04.0"
-  cluster_identifier            = "${var.prefix}-${var.environment}"
-  instance_class                = "db.serverless"
+  engine             = "aurora-mysql"
+  engine_version     = "8.0.mysql_aurora.3.04.0"
+  cluster_identifier = "${var.prefix}-${var.environment}"
+  instance_class     = "db.serverless"
 
   # Enhanced monitoring
   monitoring_interval = 30
