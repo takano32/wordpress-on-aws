@@ -41,8 +41,9 @@ resource "aws_security_group" "alb" {
 
 
 module "alb" {
+  # http://registry.terraform.io/modules/terraform-aws-modules/alb/aws/latest
   source             = "terraform-aws-modules/alb/aws"
-  version            = "~> 5.0"
+  version            = "~> 8.0"
   name               = "${var.prefix}-${var.environment}"
   load_balancer_type = "application"
   vpc_id             = module.vpc.vpc_id
