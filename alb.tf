@@ -3,8 +3,9 @@ resource "random_string" "alb_suffix" {
   special = false
 }
 module "acm_alb" {
+  # http://registry.terraform.io/modules/terraform-aws-modules/acm/aws/latest
   source      = "terraform-aws-modules/acm/aws"
-  version     = "~> v2.0"
+  version     = "~> v5.0"
   domain_name = var.public_alb_domain
   zone_id     = data.aws_route53_zone.this.zone_id
   tags        = var.tags
@@ -52,7 +53,7 @@ module "alb" {
 
   https_listeners = [
     {
-      "certificate_arn" = module.acm_alb.this_acm_certificate_arn
+      "certificate_arn" = module.acm_alb.acm_certificate_arn
       "port"            = 443
     },
   ]
