@@ -82,7 +82,11 @@ resource "aws_iam_policy" "task_policy" {
       "Effect": "Allow",
       "Action": [
         "elasticfilesystem:ClientMount",
-        "elasticfilesystem:ClientWrite"
+        "elasticfilesystem:ClientWrite",
+        "ssmmessages:CreateControlChannel",
+        "ssmmessages:CreateDataChannel",
+        "ssmmessages:OpenControlChannel",
+        "ssmmessages:OpenDataChannel"
       ],
       "Resource": "*"
     }
@@ -124,23 +128,33 @@ resource "aws_security_group" "wordpress" {
   }
 
   ingress {
-    from_port       = 0
-    to_port         = 0
-    protocol        = "tcp"
-    security_groups = [aws_security_group.alb.id, aws_security_group.efs.id]
+    from_port = 0
+    to_port   = 0
+    protocol  = "tcp"
+    security_groups = [
+      aws_security_group.alb.id,
+      aws_security_group.efs.id,
+      aws_security_group.elasticache.id
+    ]
   }
 
   tags = var.tags
 }
 
 resource "aws_ecs_service" "this" {
-  name            = "${var.prefix}-${var.environment}"
-  cluster         = aws_ecs_cluster.this.id
-  task_definition = aws_ecs_task_definition.this.arn
-  desired_count   = var.desired_count
-  launch_type     = "FARGATE"
+  name                   = "${var.prefix}-${var.environment}"
+  cluster                = aws_ecs_cluster.this.id
+  task_definition        = aws_ecs_task_definition.this.arn
+  desired_count          = var.desired_count
+  launch_type            = "FARGATE"
+  enable_execute_command = true
   network_configuration {
-    security_groups = [aws_security_group.alb.id, aws_security_group.db.id, aws_security_group.efs.id]
+    security_groups = [
+      aws_security_group.alb.id,
+      aws_security_group.db.id,
+      aws_security_group.efs.id,
+      aws_security_group.elasticache.id
+      ]
     subnets         = module.vpc.private_subnets
   }
 
