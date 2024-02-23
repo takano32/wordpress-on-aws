@@ -12,7 +12,7 @@ RUN pecl install memcache docker-php-ext-enable memcache
 
 
 # Download and install Total Cache plugin
-RUN curl -o w3-total-cache.zip -L -O https://downloads.wordpress.org/plugin/w3-total-cache.2.5.0.zip && \
+RUN curl -o w3-total-cache.zip -L -O https://downloads.wordpress.org/plugin/w3-total-cache.2.7.0.zip && \
     unzip w3-total-cache.zip -d /usr/src/wordpress/wp-content/plugins && \
     rm w3-total-cache.zip
 
