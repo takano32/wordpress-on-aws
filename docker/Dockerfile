@@ -1,10 +1,13 @@
-FROM --platform=linux/arm64/v8 wordpress:latest
-LABEL name="wp-memcache"
-LABEL authors="Derek Muensterman - https://github.com/h2ouw8n4"
+FROM --platform=linux/arm64/v8 wordpress:6.4.3-php8.2-apache
+LABEL name="wordpress-memcache"
+LABEL authors="TAKANO Mitsuhiro - https://github.com/takano32"
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV DEBCONF_NOWARNINGS=yes
 
 # Install Memcache PHP extension
-RUN apt update
-RUN apt install -y unzip zlib1g zlib1g-dev libssl-dev
+RUN apt-get update
+RUN apt-get install -y unzip zlib1g zlib1g-dev libssl-dev
 RUN pecl install memcache docker-php-ext-enable memcache
 
 
