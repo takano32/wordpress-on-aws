@@ -26,7 +26,7 @@ resource "aws_elasticache_cluster" "this" {
   cluster_id           = "${var.prefix}-elasticache-cluster-${var.environment}"
   engine               = "memcached"
   engine_version       = "1.6.22"
-  node_type            = "cache.t2.micro"
+  node_type            = "cache.t3.micro"
   num_cache_nodes      = 2
   parameter_group_name = "default.memcached1.6"
   port                 = 11211
