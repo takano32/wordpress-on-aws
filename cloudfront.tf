@@ -6,7 +6,7 @@ module "acm" {
   tags        = var.tags
 
   providers = {
-    aws = aws.us_east_1 # cloudfront needs acm certificate to be from "us-east-1" region
+    aws = aws.virginia # cloudfront needs acm certificate to be from "us-east-1" region
   }
 }
 
@@ -137,6 +137,3 @@ resource "aws_cloudfront_distribution" "this" {
     aws_ecs_service.this
   ]
 }
-
-
-
