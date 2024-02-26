@@ -133,7 +133,7 @@ variable "task_cpu_high_threshold" {
 
 variable "max_task" {
   description = "Maximum number of tasks should the service scale to"
-  default     = "2"
+  default     = "6"
 }
 
 variable "min_task" {
