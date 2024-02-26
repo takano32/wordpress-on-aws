@@ -65,7 +65,7 @@ variable "db_backup_window" {
 
 variable "db_max_capacity" {
   description = "The maximum Aurora capacity unit of the db. Ref - https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.how-it-works.html"
-  default     = "1"
+  default     = "4"
 }
 variable "db_min_capacity" {
   description = "The minimum Aurora capacity unit of the db. Ref - https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.how-it-works.html"
