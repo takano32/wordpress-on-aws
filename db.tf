@@ -18,7 +18,7 @@ resource "aws_rds_cluster" "this" {
 
   serverlessv2_scaling_configuration {
     min_capacity = 1
-    max_capacity = 4
+    max_capacity = var.db_max_capacity
   }
 
   db_subnet_group_name   = aws_db_subnet_group.this.name
