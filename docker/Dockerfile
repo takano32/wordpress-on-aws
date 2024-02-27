@@ -17,6 +17,7 @@ RUN curl -o w3-total-cache.zip -L -O https://downloads.wordpress.org/plugin/w3-t
     rm w3-total-cache.zip
 
 RUN curl -o - -OL https://elasticache-downloads.s3.amazonaws.com/ClusterClient/PHP-8.2/latest-64bit-arm-X86-openssl3 | tar zxvf - && \
+    rm ./README.markdown && \
     chmod o+x ./amazon-elasticache-cluster-client.so && \
     chown root:root ./amazon-elasticache-cluster-client.so && \
     mv ./amazon-elasticache-cluster-client.so /usr/local/lib/php/extensions/no-debug-non-zts*/ && \
