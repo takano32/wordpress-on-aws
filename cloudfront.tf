@@ -12,6 +12,7 @@ module "acm" {
 }
 
 resource "aws_cloudfront_distribution" "this" {
+  http_version = "http2and3"
   origin {
     domain_name = module.alb.lb_dns_name
     origin_id   = "alb"
