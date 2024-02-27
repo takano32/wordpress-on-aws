@@ -31,6 +31,9 @@ resource "aws_rds_cluster" "this" {
 }
 
 resource "aws_rds_cluster_instance" "cluster_instances" {
+  count              = 3
+  availability_zone = module.vpc.azs[count.index % length(module.vpc.azs)]
+
   engine             = "aurora-mysql"
   engine_version     = "8.0.mysql_aurora.3.04.1"
   cluster_identifier = "${var.prefix}-${var.environment}"
