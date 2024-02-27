@@ -106,11 +106,11 @@ resource "aws_ecs_cluster" "this" {
 }
 
 resource "aws_ecs_cluster_capacity_providers" "cluster" {
-  cluster_name = "${var.prefix}-${var.environment}"
-
-  capacity_providers = ["FARGATE_SPOT", "FARGATE"]
-
+  cluster_name       = "${var.prefix}-${var.environment}"
+  capacity_providers = ["FARGATE_SPOT"]
   default_capacity_provider_strategy {
+    base              = 0
+    weight            = 10
     capacity_provider = "FARGATE_SPOT"
   }
 }
@@ -148,14 +148,15 @@ resource "aws_ecs_service" "this" {
   desired_count          = var.desired_count
   launch_type            = "FARGATE"
   enable_execute_command = true
+
   network_configuration {
     security_groups = [
       aws_security_group.alb.id,
       aws_security_group.db.id,
       aws_security_group.efs.id,
       aws_security_group.elasticache.id
-      ]
-    subnets         = module.vpc.private_subnets
+    ]
+    subnets = module.vpc.private_subnets
   }
 
   load_balancer {
@@ -165,11 +166,13 @@ resource "aws_ecs_service" "this" {
   }
 
   lifecycle {
-    ignore_changes = [desired_count]
+    ignore_changes = [
+      task_definition,
+      desired_count,
+      capacity_provider_strategy
+    ]
   }
-
 }
-
 
 resource "aws_ecs_task_definition" "this" {
   family                   = "${var.prefix}-${var.environment}"

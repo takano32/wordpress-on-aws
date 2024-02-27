@@ -27,7 +27,7 @@ variable "error_ttl" {
 
 variable "desired_count" {
   description = "The number of instances of fargate tasks to keep running"
-  default     = "2"
+  default     = "3"
 }
 variable "log_retention_in_days" {
   description = "The number of days to retain cloudwatch log"
