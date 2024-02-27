@@ -13,6 +13,7 @@ module "acm" {
 
 resource "aws_cloudfront_distribution" "this" {
   http_version = "http2and3"
+  web_acl_id = aws_wafv2_web_acl.web_acl.arn
   origin {
     domain_name = module.alb.lb_dns_name
     origin_id   = "alb"
@@ -26,7 +27,7 @@ resource "aws_cloudfront_distribution" "this" {
   }
 
   enabled         = true
-  is_ipv6_enabled = true
+  is_ipv6_enabled = false
   comment         = var.site_domain
 
   aliases = [var.site_domain]
