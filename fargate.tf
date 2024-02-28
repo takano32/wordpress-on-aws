@@ -267,7 +267,7 @@ resource "aws_lb_target_group" "this" {
   vpc_id      = module.vpc.vpc_id
   health_check {
     path    = "/"
-    matcher = "200,302"
+    matcher = "200,301,302"
   }
 
 }
