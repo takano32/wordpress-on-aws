@@ -283,7 +283,7 @@ resource "aws_lb_listener_rule" "wordpress" {
 
   condition {
     host_header {
-      values = [var.site_domain, var.public_alb_domain]
+      values = [var.site_domain]
     }
   }
 }

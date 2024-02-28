@@ -11,9 +11,6 @@ variable "prefix" {
 variable "site_domain" {
   description = "The primary domain name of the website"
 }
-variable "public_alb_domain" {
-  description = "The public domain name of the ALB"
-}
 
 variable "cf_price_class" {
   description = "The price class for this distribution. One of PriceClass_All, PriceClass_200, PriceClass_100"

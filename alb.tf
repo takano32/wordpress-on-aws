@@ -6,7 +6,7 @@ module "acm_alb" {
   # http://registry.terraform.io/modules/terraform-aws-modules/acm/aws/latest
   source      = "terraform-aws-modules/acm/aws"
   version     = "~> v5.0"
-  domain_name = var.public_alb_domain
+  domain_name = var.site_domain
   zone_id     = data.aws_route53_zone.this.zone_id
   tags        = var.tags
 }
