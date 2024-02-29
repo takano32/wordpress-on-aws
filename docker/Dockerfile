@@ -8,10 +8,14 @@ ENV DEBCONF_NOWARNINGS=yes
 # Install Memcache PHP extension
 RUN apt-get update
 RUN apt-get install -y unzip zlib1g zlib1g-dev libssl-dev
-RUN pecl install memcache apcu
-RUN docker-php-ext-enable memcache apcu
+RUN pecl install memcache
+RUN docker-php-ext-enable memcache
 
-# ssh2
+# Install APCu and Xdebug PHP extension
+RUN pecl install apcu xdebug
+RUN docker-php-ext-enable apcu xdebug
+
+# Install SSH2 PHP extension
 RUN apt-get install -y libssh2-1-dev
 RUN pecl install ssh2
 RUN docker-php-ext-enable ssh2
