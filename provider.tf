@@ -1,7 +1,8 @@
 terraform {
   backend "s3" {
     bucket = "wordpress-on-aws"
-    key    = "wordpress"
+    key    = "wordpress.tfstate"
+    region = "ap-northeast-1"
   }
 }
 
