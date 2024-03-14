@@ -17,7 +17,7 @@ resource "aws_rds_cluster" "this" {
   enabled_cloudwatch_logs_exports = ["audit"]
 
   serverlessv2_scaling_configuration {
-    min_capacity = 1
+    min_capacity = var.db_min_capacity
     max_capacity = var.db_max_capacity
   }
 
@@ -31,7 +31,7 @@ resource "aws_rds_cluster" "this" {
 }
 
 resource "aws_rds_cluster_instance" "cluster_instances" {
-  count              = 3
+  count              = var.db_min_capacity
   availability_zone = module.vpc.azs[count.index % length(module.vpc.azs)]
 
   engine             = "aurora-mysql"
