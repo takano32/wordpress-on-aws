@@ -1,0 +1,14 @@
+regions: #削除するリージョン
+- ap-northeast-1
+- global
+account-blocklist:
+- 000000000　# 削除対象外アカウントのアカウントID(指定しないとエラーになる)
+resource-types:
+  excludes:
+  - IAMRole
+  - IAMRolePolicyAttachment
+  - IAMSAMLProvider
+  - IAMRolePolicy
+accounts:
+  828936781852: {} #削除対象アカウントのアカウントID 要書き換え
+

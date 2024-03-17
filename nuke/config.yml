@@ -1,0 +1,34 @@
+regions:
+- "global"
+
+account-blocklist:
+- "999999999" 
+
+resource-types:
+  excludes:
+  - IAMUser
+  - IAMGroup
+  - IAMGroupPolicy
+  - IAMGroupPolicyAttachment
+  - IAMInstanceProfile
+  - IAMInstanceProfileRole
+  - IAMLoginProfile
+  - IAMOpenIDConnectProvider
+  - IAMPolicy
+  - IAMRole
+  - IAMRolePolicy
+  - IAMRolePolicyAttachment
+  - IAMSAMLProvider
+  - IAMServerCertificate
+  - IAMServiceSpecificCredential
+  - IAMSigningCertificate
+  - IAMUser
+  - IAMUserAccessKey
+  - IAMUserGroupAttachment
+  - IAMUserPolicy
+  - IAMUserPolicyAttachment
+
+accounts:
+  828936781852: {}
+  
+
